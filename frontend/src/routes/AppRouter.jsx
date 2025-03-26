@@ -1,20 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Login from "../components/Login";
 import Signup from "../components/Signup";
-import Home from "../pages/Home";
+import Login from "../components/Login";
+import Dashboard from "../pages/Dashboard";
+import ProtectedRoute from "../utils/ProtectedRoute";
 
-const AppRouter = () => {
+function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
     </Router>
   );
-};
+}
 
-export default AppRouter;
+export default App;
